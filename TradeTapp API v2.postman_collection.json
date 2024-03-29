@@ -1,0 +1,2463 @@
+{
+	"info": {
+		"_postman_id": "96c1570b-acee-46bd-b9fd-c380d45059fe",
+		"name": "TradeTapp API v2",
+		"description": "Public API of TradeTapp by BuildingConnected.\n\nContact Support:\n Email: risk-makers@autodesk.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "587147"
+	},
+	"item": [
+		{
+			"name": "financials",
+			"item": [
+				{
+					"name": "get Financials",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/construction/tradetapp/v2/financials",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"construction",
+								"tradetapp",
+								"v2",
+								"financials"
+							],
+							"query": [
+								{
+									"key": "cursorState",
+									"value": "<string>",
+									"description": "An opaque cursor token that identifies where the next page of paginated results should start. It's returned in each paginated response so that it can be provided in the next request to continue paginated results. If a paginated response contains no ``cursorState`` value, there are no further pages to return.\n\nOmit this parameter to initiate a paginated request or to restart pagination.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "<integer>",
+									"description": "The maximum number of records that the endpoint may return per page.\n\nNote that a returned page may contain fewer records than the limit under either of these conditions:\n\n- There are fewer records found than the limit value.\n- The last page of a set is returned.\n\nDefault value: ``100``",
+									"disabled": true
+								},
+								{
+									"key": "filter[uniqueId]",
+									"value": "<string>",
+									"description": "Filter by a string that specifies the internal unique ID that is set by the GC.",
+									"disabled": true
+								},
+								{
+									"key": "searchText",
+									"value": "",
+									"description": "Search for records whose company name or parent company name matches this text. It performs a case-insensitive search with the given regular expression. If not a valid regular expression, it performs an exact text search.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieves a list of the BuildingConnected users in the requesting user's company. The results are scoped to a given BuildingConnected company.\n\nNote that invited external members of projects are not included in the response."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>&filter[uniqueId]=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "filter[uniqueId]",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"pagination\": {\n        \"limit\": \"<integer>\",\n        \"cursorState\": \"<string>\",\n        \"nextUrl\": \"<string>\",\n        \"previousUrl\": \"<string>\"\n    },\n    \"results\": [\n        {\n            \"id\": \"<string>\",\n            \"uniqueId\": \"<string>\",\n            \"companyName\": \"<string>\",\n            \"hasParentCompany\": \"<boolean>\",\n            \"parentCompanyName\": \"<string>\",\n            \"riskEvaluationScore\": \"<integer>\",\n            \"benchmarks\": {\n                \"debtScore\": \"<integer>\",\n                \"debtYear\": \"<integer>\",\n                \"liquidityScore\": \"<integer>\",\n                \"liquidityYear\": \"<integer>\",\n                \"profitabilityScore\": \"<integer>\",\n                \"profitabilityYear\": \"<integer>\",\n                \"turnoverScore\": \"<integer>\",\n                \"turnoverYear\": \"<integer>\",\n                \"overallBenchmarkingScore\": \"<integer>\",\n                \"overallBenchmarkingYear\": \"<integer>\"\n            },\n            \"keyMetrics\": {\n                \"dartRates\": [\n                    {\n                        \"score\": \"<number>\",\n                        \"year\": \"<integer>\"\n                    }\n                ],\n                \"experienceModificationRatings\": [\n                    {\n                        \"score\": \"<number>\",\n                        \"year\": \"<integer>\"\n                    }\n                ],\n                \"recordableIncidentRates\": [\n                    {\n                        \"score\": \"<number>\",\n                        \"year\": \"<integer>\"\n                    }\n                ],\n                \"aggregateTotalCapacity\": \"<number>\",\n                \"largestProject\": \"<integer>\",\n                \"largestProjectYear\": \"<integer>\",\n                \"netCashFlow\": \"<number>\",\n                \"netCashFlowYear\": \"<integer>\",\n                \"singleProjectCapacity\": \"<number>\",\n                \"workingCapital\": \"<number>\",\n                \"workingCapitalYear\": \"<integer>\"\n            },\n            \"statements\": [\n                {\n                    \"period\": \"<integer>\",\n                    \"type\": \"<string>\",\n                    \"date\": \"<date>\",\n                    \"rawData\": {\n                        \"accountsPayable\": \"<number>\",\n                        \"accountsReceivable\": \"<number>\",\n                        \"amountOfCreditUsed\": \"<number>\",\n                        \"billingInExcessOfCost\": \"<number>\",\n                        \"cashAndCashEquivalents\": \"<number>\",\n                        \"costInExcessOfBillings\": \"<number>\",\n                        \"costsOfGoodsSold\": \"<number>\",\n                        \"currentLiabilities\": \"<number>\",\n                        \"earningsBeforeIncomeTaxes\": \"<number>\",\n                        \"equity\": \"<number>\",\n                        \"interestExpense\": \"<number>\",\n                        \"interestIncome\": \"<number>\",\n                        \"marketableSecurities\": \"<number>\",\n                        \"netCashFromFinancing\": \"<number>\",\n                        \"netCashFromInvestments\": \"<number>\",\n                        \"netCashFromOperations\": \"<number>\",\n                        \"netIncome\": \"<number>\",\n                        \"revenueSales\": \"<number>\",\n                        \"totalAssets\": \"<number>\",\n                        \"currentAssets\": \"<number>\",\n                        \"totalLiabilities\": \"<number>\",\n                        \"totalLineOfCredit\": \"<number>\"\n                    },\n                    \"metrics\": {\n                        \"accountsReceivableTurnover\": \"<number>\",\n                        \"assetTurnoverRatio\": \"<number>\",\n                        \"cashToOverbillings\": \"<number>\",\n                        \"currentRatio\": \"<number>\",\n                        \"daysOfCashOnHand\": \"<number>\",\n                        \"debtLessCashToEquity\": \"<number>\",\n                        \"debtRatio\": \"<number>\",\n                        \"debtToEquity\": \"<number>\",\n                        \"equityToSales\": \"<number>\",\n                        \"equityToTotalLiabilities\": \"<number>\",\n                        \"grossProfitMargin\": \"<number>\",\n                        \"netProfitMargin\": \"<number>\",\n                        \"quickRatio\": \"<number>\",\n                        \"returnOnAssets\": \"<number>\",\n                        \"underbillingsToCurrentAssets\": \"<number>\",\n                        \"underbillingsToWc\": \"<number>\",\n                        \"workingCapitalCompression\": \"<number>\",\n                        \"workingCapitalToSales\": \"<number>\",\n                        \"workingCapitalTurnover\": \"<number>\",\n                        \"customRatios\": [\n                            {\n                                \"name\": \"<string>\",\n                                \"value\": \"<number>\"\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    ]\n}"
+						},
+						{
+							"name": "The parameters of the requested operation are invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>&invalidParam=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "invalidParam",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The provided bearer token is not valid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user or service represented by the bearer token does not have permission to perform this operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The requested resource could not be found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "Rate limit exceeded; wait some time before retrying. The 'Retry-After' header might provide the amount of the time to wait.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "An unknown error occurred on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get Financial",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/construction/tradetapp/v2/financials/{{COMPANY_ID}}",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"construction",
+								"tradetapp",
+								"v2",
+								"financials",
+								"{{COMPANY_ID}}"
+							]
+						},
+						"description": "Retrieves the user object for a specific BuildingConnected user. The results are scoped to the requesting user's company."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"<string>\",\n    \"uniqueId\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"hasParentCompany\": \"<boolean>\",\n    \"parentCompanyName\": \"<string>\",\n    \"riskEvaluationScore\": \"<integer>\",\n    \"benchmarks\": {\n        \"debtScore\": \"<integer>\",\n        \"debtYear\": \"<integer>\",\n        \"liquidityScore\": \"<integer>\",\n        \"liquidityYear\": \"<integer>\",\n        \"profitabilityScore\": \"<integer>\",\n        \"profitabilityYear\": \"<integer>\",\n        \"turnoverScore\": \"<integer>\",\n        \"turnoverYear\": \"<integer>\",\n        \"overallBenchmarkingScore\": \"<integer>\",\n        \"overallBenchmarkingYear\": \"<integer>\"\n    },\n    \"keyMetrics\": {\n        \"dartRates\": [\n            {\n            \"score\": \"<number>\",\n            \"year\": \"<integer>\"\n            }\n        ],\n        \"experienceModificationRatings\": [\n            {\n            \"score\": \"<number>\",\n            \"year\": \"<integer>\"\n            }\n        ],\n        \"recordableIncidentRates\": [\n            {\n            \"score\": \"<number>\",\n            \"year\": \"<integer>\"\n            }\n        ],\n        \"aggregateTotalCapacity\": \"<number>\",\n        \"largestProject\": \"<integer>\",\n        \"largestProjectYear\": \"<integer>\",\n        \"netCashFlow\": \"<number>\",\n        \"netCashFlowYear\": \"<integer>\",\n        \"singleProjectCapacity\": \"<number>\",\n        \"workingCapital\": \"<number>\",\n        \"workingCapitalYear\": \"<integer>\"\n    },\n    \"statements\": [\n        {\n            \"period\": \"<integer>\",\n            \"type\": \"<string>\",\n            \"date\": \"<date>\",\n            \"rawData\": {\n            \"accountsPayable\": \"<number>\",\n            \"accountsReceivable\": \"<number>\",\n            \"amountOfCreditUsed\": \"<number>\",\n            \"billingInExcessOfCost\": \"<number>\",\n            \"cashAndCashEquivalents\": \"<number>\",\n            \"costInExcessOfBillings\": \"<number>\",\n            \"costsOfGoodsSold\": \"<number>\",\n            \"currentLiabilities\": \"<number>\",\n            \"earningsBeforeIncomeTaxes\": \"<number>\",\n            \"equity\": \"<number>\",\n            \"interestExpense\": \"<number>\",\n            \"interestIncome\": \"<number>\",\n            \"marketableSecurities\": \"<number>\",\n            \"netCashFromFinancing\": \"<number>\",\n            \"netCashFromInvestments\": \"<number>\",\n            \"netCashFromOperations\": \"<number>\",\n            \"netIncome\": \"<number>\",\n            \"revenueSales\": \"<number>\",\n            \"totalAssets\": \"<number>\",\n            \"currentAssets\": \"<number>\",\n            \"totalLiabilities\": \"<number>\",\n            \"totalLineOfCredit\": \"<number>\"\n            },\n            \"metrics\": {\n                \"accountsReceivableTurnover\": \"<number>\",\n                \"assetTurnoverRatio\": \"<number>\",\n                \"cashToOverbillings\": \"<number>\",\n                \"currentRatio\": \"<number>\",\n                \"daysOfCashOnHand\": \"<number>\",\n                \"debtLessCashToEquity\": \"<number>\",\n                \"debtRatio\": \"<number>\",\n                \"debtToEquity\": \"<number>\",\n                \"equityToSales\": \"<number>\",\n                \"equityToTotalLiabilities\": \"<number>\",\n                \"grossProfitMargin\": \"<number>\",\n                \"netProfitMargin\": \"<number>\",\n                \"quickRatio\": \"<number>\",\n                \"returnOnAssets\": \"<number>\",\n                \"underbillingsToCurrentAssets\": \"<number>\",\n                \"underbillingsToWc\": \"<number>\",\n                \"workingCapitalCompression\": \"<number>\",\n                \"workingCapitalToSales\": \"<number>\",\n                \"workingCapitalTurnover\": \"<number>\",\n                \"customRatios\": [\n                    {\n                    \"name\": \"<string>\",\n                    \"value\": \"<number>\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "The parameters of the requested operation are invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The provided bearer token is not valid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user or service represented by the bearer token does not have permission to perform this operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The requested resource could not be found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "Rate limit exceeded; wait some time before retrying. The 'Retry-After' header might provide the amount of the time to wait.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "An unknown error occurred on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/financials/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"financials",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "qualifications",
+			"item": [
+				{
+					"name": "get Qualifications",
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/construction/tradetapp/v2/qualifications",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"construction",
+								"tradetapp",
+								"v2",
+								"qualifications"
+							],
+							"query": [
+								{
+									"key": "cursorState",
+									"value": "<string>",
+									"description": "An opaque cursor token that identifies where the next page of paginated results should start. It's returned in each paginated response so that it can be provided in the next request to continue paginated results. If a paginated response contains no ``cursorState`` value, there are no further pages to return.\n\nOmit this parameter to initiate a paginated request or to restart pagination.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "<integer>",
+									"description": "The maximum number of records that the endpoint may return per page.\n\nNote that a returned page may contain fewer records than the limit under either of these conditions:\n\n- There are fewer records found than the limit value.\n- The last page of a set is returned.\n\nDefault value: ``100``",
+									"disabled": true
+								},
+								{
+									"key": "filter[uniqueId]",
+									"value": "<string>",
+									"description": "Filter by a string that specifies the internal unique ID that is set by the GC.",
+									"disabled": true
+								},
+								{
+									"key": "filter[dateUpdated]",
+									"value": "<string>",
+									"description": "Filter by a string that specifies the required range of dates and times during which the last update must have been made to the objects returned in the response, in ISO 8601 format.\n        A single date and time takes this format: ``YYYY-MM-DDThh:mm:ss.SSSZ``, A date and time range takes this\n        format: ``YYYY-MM-DDThh:mm:ss.SSSZ..YYYY-MM-DDThh:mm:ss.SSSZ``. Range queries can be closed or open in either\n        direction: ``YYYY-MM-DDThh:mm:ss.SSSZ..`` or ``..YYYY-MM-DDThh:mm:ss.SSSZ``.\n        The filtered results include the lower bound of the range and exclude the upper bound.",
+									"disabled": true
+								},
+								{
+									"key": "searchText",
+									"value": "<string>",
+									"description": "Search for records whose company name or parent company name matches this text. It performs a case-insensitive search with the given regular expression. If not a valid regular expression, it performs an exact text search.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieves a list of the BuildingConnected users in the requesting user's company. The results are scoped to a given BuildingConnected company.\n\nNote that invited external members of projects are not included in the response."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"pagination\": {\n        \"cursorState\": \"<string>\",\n        \"limit\": \"<integer>\",\n        \"nextUrl\": \"<string>\",\n        \"previousUrl\": \"<string>\"\n    },\n    \"results\": [\n        {\n            \"id\": \"<string>\",\n            \"uniqueId\": \"<string>\",\n            \"questionnaireVersion\": \"<string>\",\n            \"qualificationStatus\": \"<string>\",\n            \"applicationStatus\": \"<string>\",\n            \"applicationDetail\": \"<string>\",\n            \"companyName\": \"<string>\",\n            \"yearFounded\": \"<integer>\",\n            \"stateFounded\": \"<string>\",\n            \"taxIdType\": \"<string>\",\n            \"federalTaxId\": \"<string>\",\n            \"submissionCurrency\": \"<string>\",\n            \"numberOfHomeOfficeEmployees\": \"<integer>\",\n            \"numberOfFieldSupervisoryEmployees\": \"<integer>\",\n            \"hasProfessionalLicenses\": \"<boolean>\",\n            \"hasUnionAffiliations\": \"<boolean>\",\n            \"hasParentCompany\": \"<boolean>\",\n            \"parentCompanyName\": \"<string>\",\n            \"currentEstimatedBacklog\": \"<integer>\",\n            \"insuranceBrokerContactName\": \"<string>\",\n            \"insuranceBrokerCompanyName\": \"<string>\",\n            \"insuranceBrokerContactPhone\": \"<string>\",\n            \"insuranceBrokerContactEmail\": \"<string>\",\n            \"suretyBrokerAgencyCompanyName\": \"<string>\",\n            \"suretyBrokerContactName\": \"<string>\",\n            \"suretyBrokerContactPhone\": \"<string>\",\n            \"suretyCompanyName\": \"<string>\",\n            \"suretySingleProjectBondingCapacity\": \"<integer>\",\n            \"suretyAggregateBondingCapacity\": \"<integer>\",\n            \"bankName\": \"<string>\",\n            \"bankLineOfCreditTotal\": \"<integer>\",\n            \"bankLineOfCreditOutstanding\": \"<integer>\",\n            \"bankContactName\": \"<string>\",\n            \"bankContactPhone\": \"<string>\",\n            \"bankContactEmail\": \"<string>\",\n            \"dateSubmitted\": \"<dateTime>\",\n            \"dateUpdated\": \"<dateTime>\",\n            \"csiCodesForWorkPerformed\": [\n                {\n                    \"primaryCode\": \"<string>\",\n                    \"secondaryCode\": \"<string>\",\n                    \"tertiaryCode\": \"<string>\",\n                    \"codeDescription\": \"<string>\"\n                }\n            ],\n            \"regionsServed\": [\n                {\n                    \"region\": \"<string>\"\n                }\n            ],\n            \"marketsServed\": [\n                {\n                    \"market\": \"<string>\"\n                }\n            ],\n            \"completedReferences\": [\n                {\n                    \"projectName\": \"<string>\",\n                    \"location\": \"<string>\",\n                    \"yearCompleted\": \"<integer>\",\n                    \"value\": \"<integer>\",\n                    \"scope\": \"<string>\",\n                    \"referenceContactCompany\": \"<string>\",\n                    \"referenceContactName\": \"<string>\",\n                    \"referenceContactPhone\": \"<string>\",\n                    \"referenceContactEmail\": \"<string>\",\n                    \"isLargestProject\": \"<boolean>\"\n                }\n            ],\n            \"companyContacts\": [\n                {\n                    \"positionTitle\": \"<string>\",\n                    \"contactName\": \"<string>\",\n                    \"contactPhone\": \"<string>\",\n                    \"contactEmail\": \"<string>\",\n                    \"contactFax\": \"<string>\",\n                    \"contactType\": \"<string>\"\n                }\n            ],\n            \"insuranceCoverages\": [\n                {\n                    \"insuranceType\": \"<string>\",\n                    \"carrier\": \"<string>\",\n                    \"perOccurrenceLimit\": \"<integer>\",\n                    \"aggregateLimit\": \"<integer>\",\n                    \"policyExpirationDate\": \"<date>\",\n                    \"isNotApplicable\": \"<boolean>\"\n                }\n            ],\n            \"experienceModificationRatings\": [\n                {\n                    \"year\": \"<integer>\",\n                    \"experienceModificationRating\": \"<number>\"\n                }\n            ],\n            \"osha300Results\": [\n                {\n                    \"year\": \"<integer>\",\n                    \"totalNumberDeathsBoxG\": \"<integer>\",\n                    \"totalNumberCasesDaysAwayBoxH\": \"<integer>\",\n                    \"totalNumberCasesRestrictionTransferBoxI\": \"<integer>\",\n                    \"otherRecordableCasesBoxJ\": \"<integer>\",\n                    \"totalHoursWorked\": \"<integer>\"\n                }\n            ],\n            \"certificates\": [\n                {\n                    \"id\": \"<string>\",\n                    \"type\": {\n                        \"id\": \"<string>\",\n                        \"name\": \"<string>\"\n                    },\n                    \"agency\": {\n                        \"id\": \"<string>\",\n                        \"name\": \"<string>\",\n                        \"website\": \"<string>\"\n                    },\n                    \"number\": \"<string>\",\n                    \"expiresAt\": \"<dateTime>\",\n                    \"fileName\": \"<string>\"\n                }\n            ],\n            \"unions\": [\n                {\n                    \"unionName\": \"<string>\",\n                    \"unionNumber\": \"<string>\"\n                }\n            ],\n            \"annualVolumeRevenues\": [\n                {\n                    \"year\": \"<integer>\",\n                    \"estimatedVolumeRevenue\": \"<integer>\"\n                }\n            ],\n            \"professionalLicenses\": [\n                {\n                    \"type\": \"<string>\",\n                    \"number\": \"<string>\",\n                    \"issuingState\": \"<string>\",\n                    \"issuingAgency\": \"<string>\",\n                    \"additionalDescription\": \"<string>\"\n                }\n            ],\n            \"companyOfficeAddresses\": {\n                \"pagination\": {\n                    \"cursorState\": \"<string>\",\n                    \"limit\": \"<integer>\",\n                    \"nextUrl\": \"<url>\",\n                    \"previousUrl\": \"<url>\"\n                },\n                \"results\": [\n                    {\n                        \"isMainOffice\": \"<boolean>\",\n                        \"address1\": \"<string>\",\n                        \"address2\": \"<string>\",\n                        \"city\": \"<string>\",\n                        \"state\": \"<string>\",\n                        \"zipCode\": \"<string>\"\n                    }\n                ]\n            },\n            \"customQuestions\": {\n                \"pagination\": {\n                    \"cursorState\": \"<string>\",\n                    \"limit\": \"<integer>\",\n                    \"nextUrl\": \"<url>\",\n                    \"previousUrl\": \"<url>\"\n                },\n                \"results\": [\n                    {\n                        \"question\": \"<string>\",\n                        \"section\": \"<string>\",\n                        \"textResponse\": \"<string>\",\n                        \"numberResponse\": \"<number>\",\n                        \"booleanResponse\": \"<boolean>\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "The parameters of the requested operation are invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications?cursorState=<string>&limit=<integer>&invalidParam=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "invalidParam",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The provided bearer token is not valid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user or service represented by the bearer token does not have permission to perform this operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The requested resource could not be found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "Rate limit exceeded; wait some time before retrying. The 'Retry-After' header might provide the amount of the time to wait.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "An unknown error occurred on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get Qualification",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/construction/tradetapp/v2/qualifications/{{COMPANY_ID}}",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"construction",
+								"tradetapp",
+								"v2",
+								"qualifications",
+								"{{COMPANY_ID}}"
+							]
+						},
+						"description": "Retrieves the user object for a specific BuildingConnected user. The results are scoped to the requesting user's company."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"<string>\",\n    \"uniqueId\": \"<string>\",\n    \"questionnaireVersion\": \"<string>\",\n    \"qualificationStatus\": \"<string>\",\n    \"applicationStatus\": \"<string>\",\n    \"applicationDetail\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"yearFounded\": \"<integer>\",\n    \"stateFounded\": \"<string>\",\n    \"taxIdType\": \"<string>\",\n    \"federalTaxId\": \"<string>\",\n    \"submissionCurrency\": \"<string>\",\n    \"numberOfHomeOfficeEmployees\": \"<integer>\",\n    \"numberOfFieldSupervisoryEmployees\": \"<integer>\",\n    \"hasProfessionalLicenses\": \"<boolean>\",\n    \"hasUnionAffiliations\": \"<boolean>\",\n    \"hasParentCompany\": \"<boolean>\",\n    \"parentCompanyName\": \"<string>\",\n    \"currentEstimatedBacklog\": \"<integer>\",\n    \"insuranceBrokerContactName\": \"<string>\",\n    \"insuranceBrokerCompanyName\": \"<string>\",\n    \"insuranceBrokerContactPhone\": \"<string>\",\n    \"insuranceBrokerContactEmail\": \"<string>\",\n    \"suretyBrokerAgencyCompanyName\": \"<string>\",\n    \"suretyBrokerContactName\": \"<string>\",\n    \"suretyBrokerContactPhone\": \"<string>\",\n    \"suretyCompanyName\": \"<string>\",\n    \"suretySingleProjectBondingCapacity\": \"<integer>\",\n    \"suretyAggregateBondingCapacity\": \"<integer>\",\n    \"bankName\": \"<string>\",\n    \"bankLineOfCreditTotal\": \"<integer>\",\n    \"bankLineOfCreditOutstanding\": \"<integer>\",\n    \"bankContactName\": \"<string>\",\n    \"bankContactPhone\": \"<string>\",\n    \"bankContactEmail\": \"<string>\",\n    \"dateSubmitted\": \"<dateTime>\",\n    \"dateUpdated\": \"<dateTime>\",\n    \"csiCodesForWorkPerformed\": [\n        {\n            \"primaryCode\": \"<string>\",\n            \"secondaryCode\": \"<string>\",\n            \"tertiaryCode\": \"<string>\",\n            \"codeDescription\": \"<string>\"\n        }\n    ],\n    \"regionsServed\": [\n        {\n            \"region\": \"<string>\"\n        }\n    ],\n    \"marketsServed\": [\n        {\n            \"market\": \"<string>\"\n        }\n    ],\n    \"completedReferences\": [\n        {\n            \"projectName\": \"<string>\",\n            \"location\": \"<string>\",\n            \"yearCompleted\": \"<integer>\",\n            \"value\": \"<integer>\",\n            \"scope\": \"<string>\",\n            \"referenceContactCompany\": \"<string>\",\n            \"referenceContactName\": \"<string>\",\n            \"referenceContactPhone\": \"<string>\",\n            \"referenceContactEmail\": \"<string>\",\n            \"isLargestProject\": \"<boolean>\"\n        }\n    ],\n    \"companyContacts\": [\n        {\n            \"positionTitle\": \"<string>\",\n            \"contactName\": \"<string>\",\n            \"contactPhone\": \"<string>\",\n            \"contactEmail\": \"<string>\",\n            \"contactFax\": \"<string>\",\n            \"contactType\": \"<string>\"\n        }\n    ],\n    \"insuranceCoverages\": [\n        {\n            \"insuranceType\": \"<string>\",\n            \"carrier\": \"<string>\",\n            \"perOccurrenceLimit\": \"<integer>\",\n            \"aggregateLimit\": \"<integer>\",\n            \"policyExpirationDate\": \"<date>\",\n            \"isNotApplicable\": \"<boolean>\"\n        }\n    ],\n    \"experienceModificationRatings\": [\n        {\n            \"year\": \"<integer>\",\n            \"experienceModificationRating\": \"<number>\"\n        }\n    ],\n    \"osha300Results\": [\n        {\n            \"year\": \"<integer>\",\n            \"totalNumberDeathsBoxG\": \"<integer>\",\n            \"totalNumberCasesDaysAwayBoxH\": \"<integer>\",\n            \"totalNumberCasesRestrictionTransferBoxI\": \"<integer>\",\n            \"otherRecordableCasesBoxJ\": \"<integer>\",\n            \"totalHoursWorked\": \"<integer>\"\n        }\n    ],\n    \"certificates\": [\n        {\n            \"id\": \"<string>\",\n            \"type\": {\n                \"id\": \"<string>\",\n                \"name\": \"<string>\"\n            },\n            \"agency\": {\n                \"id\": \"<string>\",\n                \"name\": \"<string>\",\n                \"website\": \"<string>\"\n            },\n            \"number\": \"<string>\",\n            \"expiresAt\": \"<dateTime>\",\n            \"fileName\": \"<string>\"\n        }\n    ],\n    \"unions\": [\n        {\n            \"unionName\": \"<string>\",\n            \"unionNumber\": \"<string>\"\n        }\n    ],\n    \"annualVolumeRevenues\": [\n        {\n            \"year\": \"<integer>\",\n            \"estimatedVolumeRevenue\": \"<integer>\"\n        }\n    ],\n    \"professionalLicenses\": [\n        {\n            \"type\": \"<string>\",\n            \"number\": \"<string>\",\n            \"issuingState\": \"<string>\",\n            \"issuingAgency\": \"<string>\",\n            \"additionalDescription\": \"<string>\"\n        }\n    ],\n    \"companyOfficeAddresses\": {\n        \"pagination\": {\n            \"cursorState\": \"<string>\",\n            \"limit\": \"<integer>\",\n            \"nextUrl\": \"<url>\",\n            \"previousUrl\": \"<url>\"\n        },\n        \"results\": [\n            {\n                \"isMainOffice\": \"<boolean>\",\n                \"address1\": \"<string>\",\n                \"address2\": \"<string>\",\n                \"city\": \"<string>\",\n                \"state\": \"<string>\",\n                \"zipCode\": \"<string>\"\n            }\n        ]\n    },\n    \"customQuestions\": {\n        \"pagination\": {\n            \"cursorState\": \"<string>\",\n            \"limit\": \"<integer>\",\n            \"nextUrl\": \"<url>\",\n            \"previousUrl\": \"<url>\"\n        },\n        \"results\": [\n            {\n                \"question\": \"<string>\",\n                \"section\": \"<string>\",\n                \"textResponse\": \"<string>\",\n                \"numberResponse\": \"<number>\",\n                \"booleanResponse\": \"<boolean>\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "The parameters of the requested operation are invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										},
+										{
+											"key": "userId",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The provided bearer token is not valid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										},
+										{
+											"key": "userId",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user or service represented by the bearer token does not have permission to perform this operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										},
+										{
+											"key": "userId",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The requested resource could not be found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										},
+										{
+											"key": "userId",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "Rate limit exceeded; wait some time before retrying. The 'Retry-After' header might provide the amount of the time to wait.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										},
+										{
+											"key": "userId",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "An unknown error occurred on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualification/:companyId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualification",
+										":companyId"
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										},
+										{
+											"key": "userId",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get Qualification Company's office addresses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/construction/tradetapp/v2/qualifications/{{COMPANY_ID}}/company-office-addresses",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"construction",
+								"tradetapp",
+								"v2",
+								"qualifications",
+								"{{COMPANY_ID}}",
+								"company-office-addresses"
+							],
+							"query": [
+								{
+									"key": "cursorState",
+									"value": "<string>",
+									"description": "An opaque cursor token that identifies where the next page of paginated results should start. It's returned in each paginated response so that it can be provided in the next request to continue paginated results. If a paginated response contains no ``cursorState`` value, there are no further pages to return.\n\nOmit this parameter to initiate a paginated request or to restart pagination.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "<integer>",
+									"description": "The maximum number of records that the endpoint may return per page.\n\nNote that a returned page may contain fewer records than the limit under either of these conditions:\n\n- There are fewer records found than the limit value.\n- The last page of a set is returned.\n\nDefault value: ``100``",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieves a list of all of the specified bid's line items."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"pagination\": {\n        \"cursorState\": \"<string>\",\n        \"limit\": \"<integer>\",\n        \"nextUrl\": \"<url>\",\n        \"previousUrl\": \"<url>\"\n    },\n    \"results\": [\n        {\n            \"isMainOffice\": \"<boolean>\",\n            \"address1\": \"<string>\",\n            \"address2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zipCode\": \"<string>\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "The parameters of the requested operation are invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>&invalidParam=<string>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "invalidParam",
+											"value": "<string>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The provided bearer token is not valid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user or service represented by the bearer token does not have permission to perform this operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The requested resource could not be found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "Rate limit exceeded; wait some time before retrying. The 'Retry-After' header might provide the amount of the time to wait.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "An unknown error occurred on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/company-office-addresses?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"company-office-addresses"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get Qualfication Custom Questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/construction/tradetapp/v2/qualifications/{{COMPANY_ID}}/custom-questions",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"construction",
+								"tradetapp",
+								"v2",
+								"qualifications",
+								"{{COMPANY_ID}}",
+								"custom-questions"
+							],
+							"query": [
+								{
+									"key": "cursorState",
+									"value": "<string>",
+									"description": "An opaque cursor token that identifies where the next page of paginated results should start. It's returned in each paginated response so that it can be provided in the next request to continue paginated results. If a paginated response contains no ``cursorState`` value, there are no further pages to return.\n\nOmit this parameter to initiate a paginated request or to restart pagination.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "<integer>",
+									"description": "The maximum number of records that the endpoint may return per page.\n\nNote that a returned page may contain fewer records than the limit under either of these conditions:\n\n- There are fewer records found than the limit value.\n- The last page of a set is returned.\n\nDefault value: ``100``",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieves a list of all of the specified bid's plugs. A plug is the adjusted value of a bid line item, created using the bid leveling form.\n\nNote that the plug is associated with a particular bid line item using the ``lineItemFingerprint`` object."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"pagination\": {\n        \"cursorState\": \"<string>\",\n        \"limit\": \"<integer>\",\n        \"nextUrl\": \"<url>\",\n        \"previousUrl\": \"<url>\"\n    },\n    \"results\": [\n        {\n            \"question\": \"<string>\",\n            \"section\": \"<string>\",\n            \"textResponse\": \"<string>\",\n            \"numberResponse\": \"<number>\",\n            \"booleanResponse\": \"<boolean>\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "The parameters of the requested operation are invalid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The provided bearer token is not valid.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user or service represented by the bearer token does not have permission to perform this operation.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "The requested resource could not be found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "Rate limit exceeded; wait some time before retrying. The 'Retry-After' header might provide the amount of the time to wait.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						},
+						{
+							"name": "An unknown error occurred on the server.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: oauth2",
+										"key": "Authorization",
+										"value": "<token>"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/qualifications/:companyId/custom-questions?cursorState=<string>&limit=<integer>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"qualifications",
+										":companyId",
+										"custom-questions"
+									],
+									"query": [
+										{
+											"key": "cursorState",
+											"value": "<string>"
+										},
+										{
+											"key": "limit",
+											"value": "<integer>"
+										}
+									],
+									"variable": [
+										{
+											"key": "companyId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "scope",
+				"value": "data:read",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://developer.api.autodesk.com/authentication/v2/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://developer.api.autodesk.com/authentication/v2/authorize",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "https://www.getpostman.com/oauth2/callback",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{CLIENT_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Construction TradeTapp API Token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://developer.api.autodesk.com/construction/tradetapp/v2",
+			"type": "string"
+		},
+		{
+			"key": "authUrl",
+			"value": "https://developer.api.autodesk.com/authentication/v2",
+			"type": "string"
+		},
+		{
+			"key": "clientId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "clientSecret",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

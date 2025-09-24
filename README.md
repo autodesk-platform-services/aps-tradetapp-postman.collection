@@ -45,8 +45,8 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    - Grant Type `Authorization Code`
    - Callback URL  `https://www.getpostman.com/oauth2/callback`
-   - Auth URL  `https://developer.api.autodesk.com/authentication/v1/authorize`
-   - Access Token URL  `https://developer.api.autodesk.com/authentication/v1/gettoken`
+   - Auth URL  `https://developer.api.autodesk.com/authentication/v2/authorize`
+   - Access Token URL  `https://developer.api.autodesk.com/authentication/v2/token`
 
    - Client ID `{{CLIENT_ID}}`
    - Client Secret `{{CLIENT_SECRET}}`
@@ -80,6 +80,16 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 ## Troubleshooting
 
 Please contact us via https://aps.autodesk.com/en/support/get-help.
+
+### Authentication Redirect Fails in Postman Desktop Application
+
+If you encounter issues with authentication redirects failing while using the postman desktop application, consider testing via the Postman web application [here](https://web.postman.co/).
+
+The web application requires that the Callback URL in the Authorization tab is set to:
+
+`https://oauth.pstmn.io/v1/browser-callback`
+
+You must add this URL to the list of available callback URLs for your registered APS application (Step 1. of [Setup](#setup)).
 
 ## License
 
